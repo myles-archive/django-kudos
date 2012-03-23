@@ -9,5 +9,24 @@
 {% endblock %}
 
 {% block content %}
-	{{ flatpage.content }}
+	{{ flatpage.content|linebreaks }}
+	
+	<div>
+		<p><a href="#" class="give_kudos">Give Kudos</a></p>
+		
+		<script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$(".give_kudos").click(function() {
+					$.ajax({
+						type: "POST",
+						url: "{% url kudos_give %}",
+						data: "app_label=flatpages&model=flatpage&object_pk={{ flatpage.pk }}"
+					}).done(function(msg) {
+						alert("You gave me Kudos!");
+					});
+				});
+			});
+		</script>
+	</div>
 {% endblock %}

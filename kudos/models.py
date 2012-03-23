@@ -9,16 +9,13 @@ class Kudos(models.Model):
 	object_id = models.PositiveIntegerField()
 	content_object = generic.GenericForeignKey()
 	
-	user = models.ForeignKeyField(User, blank=True, null=True)
+	user = models.ForeignKey(User, blank=True, null=True)
 	
 	date_added = models.DateTimeField(_('date added'), auto_now_add=True)
 	
 	class Meta:
 		verbose_name = _('kudos')
-		verbose_name_plaural = _('kudos')
+		verbose_name_plural = _('kudos')
 		db_table = 'kudos'
 		ordering = ('-date_added',)
 		get_latest_by = 'date_added'
-	
-	def __unicode__(self):
-		return _(u"Kudos for %s" % self.content_object.__unicode__)
